@@ -12,13 +12,10 @@ import {
 import { ArrowUpIcon, ArrowDownIcon, SearchIcon } from 'lucide-react'
 import { Link, useSearchParams } from 'react-router'
 import { Skeleton } from '@/components/ui/skeleton.tsx'
-import {
-  POPULAR_STOCKS_COUNT,
-  type Stock,
-  type StockFilters,
-  usePopularStocks,
-  useSearchStocks,
-} from '@/pages/home/hooks/use-search-stocks.ts'
+import { POPULAR_STOCKS_COUNT } from './hooks/use-popular-stocks'
+import type { Stock, StockFilters } from '@/lib/types'
+import { useSearchStocks } from './hooks/use-search-stocks'
+import { usePopularStocks } from './hooks/use-popular-stocks'
 import { cn } from '@/lib/utils.ts'
 import { useIsFetching } from '@tanstack/react-query'
 import { stockKeys } from '@/lib/query-keys.ts'
@@ -306,6 +303,8 @@ function PopularStocks() {
     popularStocks,
     popularStocksError,
   } = usePopularStocks()
+
+  console.log(popularStocks)
 
   if (isPopularStocksLoading) {
     return <StockCardSkeletonList count={POPULAR_STOCKS_COUNT} />
